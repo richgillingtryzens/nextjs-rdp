@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes'
 
 export interface State {
   displaySidebar: boolean
+  displayMobileNavbar: boolean
   displayDropdown: boolean
   displayModal: boolean
   displayToast: boolean
@@ -25,6 +26,12 @@ type Action =
     }
   | {
       type: 'CLOSE_SIDEBAR'
+    }
+  | {
+      type: 'CLOSE_MOBILENAVBAR'
+    }
+  | {
+      type: 'OPEN_MOBILENAVBAR'
     }
   | {
       type: 'OPEN_TOAST'
@@ -55,7 +62,7 @@ type Action =
   | {
       type: 'SET_USER_AVATAR'
       value: string
-  }
+    }
 
 type MODAL_VIEWS = 'SIGNUP_VIEW' | 'LOGIN_VIEW' | 'FORGOT_VIEW'
 type ToastText = string
@@ -70,6 +77,18 @@ function uiReducer(state: State, action: Action) {
       return {
         ...state,
         displaySidebar: true,
+      }
+    }
+    case 'OPEN_MOBILENAVBAR': {
+      return {
+        ...state,
+        displayMobileNavbar: true
+      }
+    }
+    case 'CLOSE_MOBILENAVBAR': {
+      return {
+        ...state,
+        displayMobileNavbar: false
       }
     }
     case 'CLOSE_SIDEBAR': {
@@ -148,6 +167,9 @@ export const UIProvider: FC = (props) => {
   const closeSidebarIfPresent = () =>
     state.displaySidebar && dispatch({ type: 'CLOSE_SIDEBAR' })
 
+  const openMobileNavbar = () => dispatch({ type: 'OPEN_MOBILENAVBAR' })
+  const closeMobileNavbar = () => dispatch({ type: 'CLOSE_MOBILENAVBAR' })
+
   const openDropdown = () => dispatch({ type: 'OPEN_DROPDOWN' })
   const closeDropdown = () => dispatch({ type: 'CLOSE_DROPDOWN' })
 
@@ -157,7 +179,8 @@ export const UIProvider: FC = (props) => {
   const openToast = () => dispatch({ type: 'OPEN_TOAST' })
   const closeToast = () => dispatch({ type: 'CLOSE_TOAST' })
 
-  const setUserAvatar = (value: string) => dispatch({ type: 'SET_USER_AVATAR', value })
+  const setUserAvatar = (value: string) =>
+    dispatch({ type: 'SET_USER_AVATAR', value })
 
   const setModalView = (view: MODAL_VIEWS) =>
     dispatch({ type: 'SET_MODAL_VIEW', view })
@@ -167,6 +190,8 @@ export const UIProvider: FC = (props) => {
       ...state,
       openSidebar,
       closeSidebar,
+      openMobileNavbar,
+      closeMobileNavbar,
       toggleSidebar,
       closeSidebarIfPresent,
       openDropdown,
@@ -176,7 +201,7 @@ export const UIProvider: FC = (props) => {
       setModalView,
       openToast,
       closeToast,
-      setUserAvatar
+      setUserAvatar,
     }),
     [state]
   )

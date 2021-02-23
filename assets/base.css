@@ -20,16 +20,19 @@
   --blue: #0070f3;
   --violet: #5f3dc4;
   --violet-light: #7048e8;
+  --yellow: #f7f5f2;
+  --maroon: #94123f;
   --accents-0: #f8f9fa;
   --accents-1: #f1f3f5;
   --accents-2: #e9ecef;
-  --accents-3: #dee2e6;
+  --accents-3: #4b5b63;
   --accents-4: #ced4da;
   --accents-5: #adb5bd;
   --accents-6: #868e96;
   --accents-7: #495057;
   --accents-8: #343a40;
   --accents-9: #212529;
+  --accents-10: #d92161;
   --font-sans: -apple-system, system-ui, BlinkMacSystemFont, 'Helvetica Neue',
     'Helvetica', sans-serif;
 }
@@ -58,6 +61,11 @@
   --accents-7: #e9ecef;
   --accents-8: #f1f3f5;
   --accents-9: #f8f9fa;
+}
+
+[data-theme='jurlique'] {
+  --primary: '#94123f';
+  --secondary: '#d92161'
 }
 
 *,

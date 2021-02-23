@@ -4,10 +4,13 @@ import s from './Layout.module.css'
 import { useRouter } from 'next/router'
 import React, { FC } from 'react'
 import { useUI } from '@components/ui/context'
-import { Navbar, Footer } from '@components/common'
+import Navbar from '@components/tryzens/Navbar'
+import { Footer } from '@components/tryzens/Footer'
 import { useAcceptCookies } from '@lib/hooks/useAcceptCookies'
 import { Sidebar, Button, Modal, LoadingDots } from '@components/ui'
 import { CartSidebarView } from '@components/cart'
+import MobileNavBar from '@components/tryzens/MobileNavbar';
+import MobileNavView from '@components/tryzens/MobileNavView';
 
 import LoginView from '@components/auth/LoginView'
 import { CommerceProvider } from '@framework'
@@ -46,10 +49,13 @@ interface Props {
 const Layout: FC<Props> = ({ children, pageProps }) => {
   const {
     displaySidebar,
+    displayMobileNavbar,
     displayModal,
     closeSidebar,
+    closeMobileNavbar,
     closeModal,
     modalView,
+
   } = useUI()
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
   const { locale = 'en-US' } = useRouter()
@@ -66,6 +72,10 @@ const Layout: FC<Props> = ({ children, pageProps }) => {
           {modalView === 'SIGNUP_VIEW' && <SignUpView />}
           {modalView === 'FORGOT_VIEW' && <ForgotPassword />}
         </Modal>
+
+        <MobileNavBar open={displayMobileNavbar} onClose={closeMobileNavbar}>
+          <MobileNavView />
+        </MobileNavBar>
 
         <Sidebar open={displaySidebar} onClose={closeSidebar}>
           <CartSidebarView />
