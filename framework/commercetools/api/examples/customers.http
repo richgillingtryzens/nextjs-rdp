@@ -1,0 +1,117 @@
+@projectKey={{$dotenv CTP_PROJECT_KEY}}
+
+# @name adminToken
+POST {{$dotenv CTP_AUTH_URL}}/oauth/token
+Authorization: Basic {{$dotenv CTP_CLIENT_ID}}:{{$dotenv CTP_CLIENT_SECRET}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+
+###
+
+# @name anonomyousAuth
+
+POST {{$dotenv CTP_AUTH_URL}}/oauth/{{$dotenv CTP_PROJECT_KEY}}/anonymous/token
+Authorization: Basic {{$dotenv CTP_CLIENT_ID}}:{{$dotenv CTP_CLIENT_SECRET}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials
+
+###
+
+@anonymousToken={{anonomyousAuth.response.body.access_token}}
+
+
+### 
+@accessToken = {{adminToken.response.body.access_token}}
+
+@email=Richard.Gilling+1000@gmail.com
+@password=London@2020
+
+# @name customerAuth
+POST {{$dotenv CTP_AUTH_URL}}/oauth/{{$dotenv CTP_PROJECT_KEY}}/customers/token
+Authorization: Basic {{$dotenv CTP_CLIENT_ID}}:{{$dotenv CTP_CLIENT_SECRET}}
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password&username={{email}}&password={{password}}&scope=manage_my_profile:{{projectKey}}
+
+###
+
+@customerToken={{customerAuth.response.body.access_token}}
+
+###
+
+# @name customerSignup
+# This is also not really working. When you put a new customer, the password authentication 
+# does not work.
+POST {{$dotenv CTP_API_URL}}/{{$dotenv CTP_PROJECT_KEY}}/me/signup
+Authorization: Bearer {{anonymousToken}}
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}",
+  "firstName": "Test",
+  "lastName": "Account",
+  "middleName": "Middle name",
+  "title": "Mr.",
+  "salutation": "Sir",
+  "externalId": "CRMID_1",
+  "companyName": "Tryzens",
+  "vatId": "Default"
+}
+
+###
+
+# @name customerSignin
+
+POST {{$dotenv CTP_API_URL}}/{{$dotenv CTP_PROJECT_KEY}}/me/login
+Authorization: Bearer {{anonymousToken}}
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "password": "{{password}}"
+}
+
+@customerVersion = {{customerSignin.response.body.customer.version}}
+
+
+###
+# @name updateCustomer
+POST {{$dotenv CTP_API_URL}}/{{$dotenv CTP_PROJECT_KEY}}/me
+Authorization: Bearer {{customerToken}}
+Content-Type: application/json
+
+{
+  "version": {{customerVersion}},
+  "actions": [
+    {"action": "setFirstName", "firstName": "Changed First Name"},
+    {"action": "setLastName", "lastName": "Changed Last Name"}
+  ]
+}
+
+@nextVersion = {{updateCustomer.response.body.version}}
+
+###
+# @name updateCustomer2
+POST {{$dotenv CTP_API_URL}}/{{$dotenv CTP_PROJECT_KEY}}/me
+Authorization: Bearer {{customerToken}}
+Content-Type: application/json
+
+{
+  "version": {{nextVersion}},
+  "actions": [
+    {"action": "setFirstName", "firstName": "Rich"},
+    {"action": "setLastName", "lastName": "Mailinator"}
+  ]
+}
+
+@finalVersion = {{updateCustomer2.response.body.version}}
+
+
+###
+
+# This is not working for some reason - looks like a bug.
+GET {{$dotenv CTP_API_URL}}/{{dotenv CTP_PROJECT_KEY}}/me
+Authorization: Bearer {{customerToken}}

@@ -1,96 +1,48 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fcommerce&project-name=commerce&repo-name=commerce&demo-title=Next.js%20Commerce&demo-description=An%20all-in-one%20starter%20kit%20for%20high-performance%20e-commerce%20sites.&demo-url=https%3A%2F%2Fdemo.vercel.store&demo-image=https%3A%2F%2Fbigcommerce-demo-asset-ksvtgfvnd.vercel.app%2Fbigcommerce.png&integration-ids=oac_MuWZiE4jtmQ2ejZQaQ7ncuDT)
+# Tryzens POC
 
-# Next.js Commerce
+This is an experimental starter project for Tryzens Headless.
 
-The all-in-one starter kit for high-performance e-commerce sites. With a few clicks, Next.js developers can clone, deploy and fully customize their own store.
-Start right now at [nextjs.org/commerce](https://nextjs.org/commerce)
+The purpose this project is threefold:
 
-Demo live at: [demo.vercel.store](https://demo.vercel.store/)
+1. To assess Next Commerce as a candidate starting point for Headless Commerce builds.
+2. As a proving grounds and education environment for our developers to refine their skills and expertise in a low-risk way.
+3. As a demonstratable storefront implementation that we can use for prospects.
 
-This project is currently <b>under development</b>.
+This project should be used to inform estimate effort estimates when quoting Headless Commerce implementations.
 
-## Features
-
-- Performant by default
-- SEO Ready
-- Internationalization
-- Responsive
-- UI Components
-- Theming
-- Standardized Data Hooks
-- Integrations - Integrate seamlessly with the most common ecommerce platforms.
-- Dark Mode Support
-
-## Work in progress
-We're using Github Projects to keep track of issues in progress and todo's. Here is our [Board](https://github.com/vercel/commerce/projects/1)
-
-## Integrations
-Next.js Commerce integrates out-of-the-box with BigCommerce. We plan to support all major ecommerce backends.
+Features Added So far in addition to Next Commerce:
 
 
-## Goals
+Standing Estimates for New Client
+=================================
+1. Custom Header (2 days)
+2. Custom Footer (2 days)
+3. Mobile Nav (2 days)
 
-* **Next.js Commerce** should have a completely data **agnostic** UI
-* **Aware of schema**: should ship with the right data schemas and types.
-* All providers should return the right data types and schemas to blend correctly with Next.js Commerce.
-* `@framework` will be the alias utilized in commerce and it will map to the ecommerce provider of preference- e.g BigCommerce, Shopify, Swell. All providers should expose the same standardized functions. _Note that the same applies for recipes using a CMS + an ecommerce provider._
 
-There is a `framework` folder in the root folder that will contain multiple ecommerce providers.
+Short Term Roadmap - Technical:
+===============================
 
-Additionally, we need to ensure feature parity (not all providers have e.g. wishlist) we will also have to build a feature API to disable/enable features in the UI.
+* API and SQL configuration example for the newsletter form.
+* Replace sample data and connect an external API
+* Integrate content page examples with Contentful
+* Integrate banners with Contentful
+* AWS environment configuration and deployment
 
-People actively working on this project: @okbel & @lfades.
+Short Term Roadmap - Business Facing:
+====================================================
+* Produt Listing & PDP view and layout.
+* Currency, language switcher and text localisation
+* Wishlist, Cart, Add to Cart
+* Promotions and Banner Management
+* Search suggestions, spell check, search filters.
+* Contentful enablement, static and dynamic content
 
-## Troubleshoot
-
-<details>
-<summary>I already own a BigCommerce store. What should I do?</summary>
-<br>
-First thing you do is: <b>set your environment variables</b>
-<br>
-<br>
-.env.local
-
-```sh
-BIGCOMMERCE_STOREFRONT_API_URL=<>
-BIGCOMMERCE_STOREFRONT_API_TOKEN=<>
-BIGCOMMERCE_STORE_API_URL=<>
-BIGCOMMERCE_STORE_API_TOKEN=<>
-BIGCOMMERCE_STORE_API_CLIENT_ID=<>
-```
-
-If your project was started with a "Deploy with Vercel" button, you can use Vercel's CLI to retrieve these credentials.
-
-1. Install Vercel CLI: `npm i -g vercel`
-2. Link local instance with Vercel and Github accounts (creates .vercel file): `vercel link`
-3. Download your environment variables: `vercel env pull .env.local`
-
-Next, you're free to customize the starter. More updates coming soon. Stay tuned.
-
-</details>
-
-<details>
-<summary>BigCommerce shows a Coming Soon page and requests a Preview Code</summary>
-<br>
-After Email confirmation, Checkout should be manually enabled through BigCommerce platform. Look for "Review & test your store" section through BigCommerce's dashboard.
-<br>
-<br>
-BigCommerce team has been notified and they plan to add more detailed about this subject.
-</details>
-
-## Contribute
-
-Our commitment to Open Source can be found [here](https://vercel.com/oss).
-
-1. [Fork](https://help.github.com/articles/fork-a-repo/) this repository to your own GitHub account and then [clone](https://help.github.com/articles/cloning-a-repository/) it to your local device.
-2. Create a new branch `git checkout -b MY_BRANCH_NAME`
-3. Install yarn: `npm install -g yarn`
-4. Install the dependencies: `yarn`
-5. Duplicate `.env.template` and rename it to `.env.local`.
-6. Add proper store values to `.env.local`.
-7. Run `yarn dev` to build and watch for code changes
-8. The development branch is `canary` (this is the branch pull requests should be made against).
-   On a release, `canary` branch is rebased into `master`.
+Medium Term Roadmap
+==================================
+* Click & Collect
+* US Tax configurations
+* Multi-language
 
 
 
