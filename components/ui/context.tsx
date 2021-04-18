@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { FC, useMemo } from 'react'
 import { ThemeProvider } from 'next-themes'
 
@@ -82,13 +83,13 @@ function uiReducer(state: State, action: Action) {
     case 'OPEN_MOBILENAVBAR': {
       return {
         ...state,
-        displayMobileNavbar: true
+        displayMobileNavbar: true,
       }
     }
     case 'CLOSE_MOBILENAVBAR': {
       return {
         ...state,
-        displayMobileNavbar: false
+        displayMobileNavbar: false,
       }
     }
     case 'CLOSE_SIDEBAR': {

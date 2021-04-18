@@ -4,9 +4,9 @@ import type { Page } from '@framework/api/operations/get-all-pages'
 import { Link } from '@components/ui'
 import { Container } from '@components/ui'
 import s from './Footer.module.css'
-import CardStrip from './CardStrip';
-import NewsletterSignupForm from './NewsletterSignup';
-import SecurityBadge from './SecurityBadge';
+import CardStrip from './CardStrip'
+import NewsletterSignupForm from './NewsletterSignup'
+import SecurityBadge from './SecurityBadge'
 
 interface Props {
   className?: string
@@ -72,22 +72,22 @@ const footerMenu = [
     children: [
       {
         label: 'Our Work',
-        link: '/our-work'
+        link: '/our-work',
       },
       {
         label: 'Our Commitment',
-        link: '/our-commitment'
+        link: '/our-commitment',
       },
       {
         label: 'Our Method',
-        link: '/our-method'
+        link: '/our-method',
       },
       {
         label: 'Our Careers',
-        link: '/our-careers'
-      }
-    ]
-  }
+        link: '/our-careers',
+      },
+    ],
+  },
 ]
 
 const UpDownArrow = ({ open }) => {
@@ -130,9 +130,9 @@ const FooterChildren = ({ children }) => {
   }
 
   return (
-    <ul class="flex flex-col">
+    <ul className="flex flex-col">
       {children.map((node: any) => (
-        <Link className="py-1 text-sm" href={node.link}>
+        <Link href={node.link}>
           <span className={s.link}>{node.label}</span>
         </Link>
       ))}
@@ -141,30 +141,41 @@ const FooterChildren = ({ children }) => {
 }
 
 const FooterMenuTitle = (props) => {
-  const {nav, onClick} = props;
+  const { nav, onClick } = props
   if (nav.link) {
-    return <h3 className="text-lg hover:text-pink font-bold hover:underline text-gray-700 link  border-gray-900">
-      <Link href={nav.link}>{nav.label}</Link>
+    return (
+      <h3 className="text-lg hover:text-pink font-bold hover:underline text-gray-700 link  border-gray-900">
+        <Link href={nav.link}>{nav.label}</Link>
       </h3>
+    )
   } else {
-    return <h3 className="text-lg text-gray-700 font-bold link border-gray-900">
-    <span className="cursor-pointer" onClick={onClick}>{nav.label}</span>
-    </h3>
+    return (
+      <h3 className="text-lg text-gray-700 font-bold link border-gray-900">
+        <span className="cursor-pointer" onClick={onClick}>
+          {nav.label}
+        </span>
+      </h3>
+    )
   }
 }
 
 const FooterMenu = (props: any) => {
   const { children, nav, className } = props
   const [open, setOpen] = useState(true)
-  const myClass = cn("border-gray-700 border-t py-2 mx-5 lg:border-0", className);
+  const myClass = cn(
+    'border-gray-700 border-t py-2 mx-5 lg:border-0',
+    className
+  )
 
   return (
     <div className={myClass}>
-      <div className="flex justify-between">        
-          <FooterMenuTitle nav={nav} onClick={() => setOpen(!open)} />
-        {(nav.children || children) && <span onClick={() => setOpen(!open)}>
-          <UpDownArrow open={open} />
-        </span>}
+      <div className="flex justify-between">
+        <FooterMenuTitle nav={nav} onClick={() => setOpen(!open)} />
+        {(nav.children || children) && (
+          <span onClick={() => setOpen(!open)}>
+            <UpDownArrow open={open} />
+          </span>
+        )}
       </div>
       {open && <FooterChildren children={nav.children} />}
       {open && children}
@@ -215,31 +226,51 @@ const Footer: FC<Props> = ({ className, pages }) => {
             </Link>
           </div>
         </div>
-        <div id="footerContainer" className="flex flex-col lg:flex-row lg:justify-between">
+        <div
+          id="footerContainer"
+          className="flex flex-col lg:flex-row lg:justify-between"
+        >
           {footerMenu.map((navItem) => (
             <FooterMenu nav={navItem} />
           ))}
-          <FooterMenu className="border-b lg:border-0" nav={{label: 'Preferences'}}>
+          <FooterMenu
+            className="border-b lg:border-0"
+            nav={{ label: 'Preferences' }}
+          >
             <span>Hello World</span>
           </FooterMenu>
         </div>
         <div className="flex flex-col lg:flex-row lg:justify-between lg:align-middle">
           <CardStrip />
           <div className="flex justify-center">
-          <SecurityBadge />
+            <SecurityBadge />
           </div>
         </div>
       </Container>
       <div className="bg-secondary text-white text-sm p-5">
         <Container>
-            <div className="flex flex-col">
-              <span className="flex justify-center">2021 &#169; Tryzens. All Rights Reserved.</span>
-              <ul className="flex flex-row justify-center">
-                <li className="pr-2"><Link href="/terms-and-conditions"><span className="hover:text-pink hover:underline">Terms and Conditions</span></Link></li>
-                <li className="pr-2"><Link href="/privacy"><span className="hover:text-pink hover:underline">Privacy</span></Link></li>
-              </ul>
-              <span className="flex justify-center">Melbourne, Australia</span>
-            </div>
+          <div className="flex flex-col">
+            <span className="flex justify-center">
+              2021 &#169; Tryzens. All Rights Reserved.
+            </span>
+            <ul className="flex flex-row justify-center">
+              <li className="pr-2">
+                <Link href="/terms-and-conditions">
+                  <span className="hover:text-pink hover:underline">
+                    Terms and Conditions
+                  </span>
+                </Link>
+              </li>
+              <li className="pr-2">
+                <Link href="/privacy">
+                  <span className="hover:text-pink hover:underline">
+                    Privacy
+                  </span>
+                </Link>
+              </li>
+            </ul>
+            <span className="flex justify-center">Melbourne, Australia</span>
+          </div>
         </Container>
       </div>
     </footer>

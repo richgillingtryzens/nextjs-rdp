@@ -7,7 +7,7 @@ import { useUI } from '@components/ui/context'
 import useCart from '@framework/cart/use-cart'
 import usePrice from '@framework/use-price'
 import s from './MobileNavView.module.css'
-import MobileNavData from './MobileNavData';
+import MobileNavData from './MobileNavData'
 
 const MobileNavView: FC = () => {
   const { closeMobileNavbar } = useUI()
@@ -54,10 +54,12 @@ const MobileNavView: FC = () => {
       </header>
       <div className="flex-1">
         <ul className="bg-primary">
-          {MobileNavData.map((node:any) => (
+          {MobileNavData.map((node: any) => (
             <li className="bg-gray-300 hover:bg-gray-200 m-2 w-64 justify-between text-xl bold p-3">
-            <Link href={node.link} className="block"><span>{node.label}</span></Link>
-          </li>
+              <Link href={node.link}>
+                <a className="block">{node.label}</a>
+              </Link>
+            </li>
           ))}
         </ul>
       </div>

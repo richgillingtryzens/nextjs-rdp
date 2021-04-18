@@ -1,5 +1,5 @@
-import { Input, Button, Link } from '../../ui';
-import {RightArrow} from '../../icons';
+import { Input, Button, Link } from '../../ui'
+import { RightArrow } from '../../icons'
 
 const NewsletterSignupForm = (props) => {
   return (
@@ -24,18 +24,16 @@ const NewsletterSignupForm = (props) => {
       <span className="text-xs text-gray-700">
         By ticking this box I agree that I would like to be kept informed about
         Jurlique's products and promotions in accordance with the{' '}
-        <Link
-          href="/privacy"
-          className="semibold underline text-maroon hover:text-pink"
-        >
-          Privacy Policy
+        <Link href="/privacy">
+          <a className="semibold underline text-maroon hover:text-pink">
+            Privacy Policy
+          </a>
         </Link>{' '}
         and{' '}
-        <Link
-          href="/terms"
-          className="semibold underline text-maroon hover:text-pink"
-        >
-          Terms &amp; Conditions of Sale
+        <Link href="/terms">
+          <a className="semibold underline text-maroon hover:text-pink">
+            Terms &amp; Conditions of Sale
+          </a>
         </Link>{' '}
         and understand that I can opt out at any time.
       </span>
@@ -43,4 +41,4 @@ const NewsletterSignupForm = (props) => {
   )
 }
 
-export default NewsletterSignupForm;
+export default NewsletterSignupForm
